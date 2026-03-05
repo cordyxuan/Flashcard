@@ -53,12 +53,12 @@ def _scan_wordlists():
 
 class FlashcardApp:
     # ── 颜色主题 ──────────────────────────────────────────────
-    BG       = '#1a1a2e'
-    CARD_BG  = '#16213e'
-    FG       = '#e8e8e8'
-    ANSWER   = '#e94560'
-    BTN_BG   = '#0f3460'
-    DIM      = '#555566'
+    BG       = '#000000'
+    CARD_BG  = '#111111'
+    FG       = '#ffffff'
+    ANSWER   = '#ffffff'
+    BTN_BG   = '#222222'
+    DIM      = '#aaaaaa'
     HL       = '#e94560'   # 选中高亮
 
     def __init__(self):
@@ -137,7 +137,7 @@ class FlashcardApp:
         # ── 全屏按钮（右上角）──
         fs_text = '退出全屏' if self.root.attributes('-fullscreen') else '全屏'
         self._fs_btn = self._btn(self.root, fs_text, self._toggle_fullscreen,
-                                 self.BTN_BG, font_size=14)
+                                 self.BTN_BG, font_size=18)
         self._fs_btn.place(relx=1.0, x=-16, y=16, anchor=tk.NE)
 
         # ── 标题区 ──
@@ -175,11 +175,11 @@ class FlashcardApp:
                 bg = self.HL if is_active else '#1e2d50'
                 fg = '#ffffff' if is_active else '#aaaacc'
                 b = tk.Button(btn_row, text=name,
-                              font=('Microsoft YaHei', 14),
-                              bg=bg, fg=fg,
-                              activebackground=self.HL, activeforeground='#fff',
+                              font=('Microsoft YaHei', 18, 'bold'),
+                              bg=bg, fg='#ffffff',
+                              activebackground=self.HL, activeforeground='#ffffff',
                               relief=tk.FLAT, bd=0,
-                              padx=18, pady=8,
+                              padx=28, pady=12,
                               cursor='hand2',
                               command=lambda p=path, n=name: self._load_builtin(p, n))
                 b.pack(side=tk.LEFT, padx=6)
@@ -267,15 +267,15 @@ class FlashcardApp:
         self._sep = tk.Frame(card, bg='#2a2a4a', height=2)
 
         self._word_lbl = tk.Label(card,
-                                  font=('Georgia', 70, 'bold'),
+                                  font=('Georgia', 100, 'bold'),
                                   bg=self.CARD_BG, fg=self.FG,
-                                  wraplength=1100, justify=tk.CENTER)
+                                  wraplength=1200, justify=tk.CENTER)
         self._word_lbl.place(relx=.5, rely=.38, anchor=tk.CENTER)
 
         self._ans_lbl = tk.Label(card,
-                                 font=('Microsoft YaHei', 44),
+                                 font=('Microsoft YaHei', 70),
                                  bg=self.CARD_BG, fg=self.ANSWER,
-                                 wraplength=1100, justify=tk.CENTER)
+                                 wraplength=1200, justify=tk.CENTER)
         self._ans_lbl.place(relx=.5, rely=.70, anchor=tk.CENTER)
 
         # 提示
@@ -342,13 +342,13 @@ class FlashcardApp:
         self._btn(row, '回到主页', self._show_home, '#0f3460').pack(side=tk.LEFT, padx=14)
 
     # ── 通用按钮工厂 ──────────────────────────────────────────
-    def _btn(self, parent, text, cmd, bg, fg=None, font_size=20):
+    def _btn(self, parent, text, cmd, bg, fg=None, font_size=24):
         return tk.Button(parent, text=text,
-                         font=('Microsoft YaHei', font_size),
-                         bg=bg, fg=fg or self.FG,
-                         activebackground=bg, activeforeground=fg or self.FG,
+                         font=('Microsoft YaHei', font_size, 'bold'),
+                         bg=bg, fg='#ffffff',
+                         activebackground=bg, activeforeground='#ffffff',
                          relief=tk.FLAT, bd=0,
-                         padx=28, pady=12,
+                         padx=40, pady=16,
                          cursor='hand2',
                          command=cmd)
 
